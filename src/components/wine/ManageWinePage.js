@@ -10,7 +10,8 @@ class ManageWinePage extends React.Component {
 
         this.state = {
             wine: Object.assign({}, props.wine),
-            errors: {}
+            errors: {},
+            saving: false
         };
 
         this.updateWineState = this.updateWineState.bind(this);
@@ -35,11 +36,13 @@ class ManageWinePage extends React.Component {
 
     saveWine(event) {
         event.preventDefault();
+        this.setState({saving: true});
         this.props.actions.saveWine(this.state.wine)
             .then(() => this.redirect());
     }
 
     redirect() {
+        this.setState({saving: false});
         this.context.router.push('/wines');
     }
 
@@ -51,6 +54,7 @@ class ManageWinePage extends React.Component {
                 onSave={this.saveWine}
                 wine={this.state.wine}
                 errors={this.state.errors}
+                saving={this.state.saving}
             />
         );
     }
