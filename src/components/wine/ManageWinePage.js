@@ -35,7 +35,11 @@ class ManageWinePage extends React.Component {
 
     saveWine(event) {
         event.preventDefault();
-        this.props.actions.saveWine(this.state.wine);
+        this.props.actions.saveWine(this.state.wine)
+            .then(() => this.redirect());
+    }
+
+    redirect() {
         this.context.router.push('/wines');
     }
 
