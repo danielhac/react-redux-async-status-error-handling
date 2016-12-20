@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import wineApi from '../api/mockWineApi';
-import {beginAjaxCall} from './ajaxStatusActions';
+import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function loadWinesSuccess(wines) {
     return { type: types.LOAD_WINES_SUCCESS, wines };
@@ -37,7 +37,9 @@ export function saveWine(wine) {
             wine.id ? dispatch(updateWineSuccess(savedWine)) :
                 dispatch(createWineSuccess(savedWine));
         }).catch(error => {
+            dispatch(ajaxCallError(error));
             throw(error);
+
         });
     };
 }

@@ -18,7 +18,7 @@ export default function ajaxStatusReducer(state = initialState.ajaxCallsInProgre
     }
 
     // Check if action type ends in success
-    else if (actionTypeEndsInSuccess(action.type)) {
+    else if (action.type == types.AJAX_CALL_ERROR || actionTypeEndsInSuccess(action.type)) {
         return state - 1;
     }
 
