@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as wineActions from '../../actions/wineActions';
 import WineForm from './WineForm';
+import toastr from 'toastr';
 
 class ManageWinePage extends React.Component {
     constructor(props, context) {
@@ -43,6 +44,7 @@ class ManageWinePage extends React.Component {
 
     redirect() {
         this.setState({saving: false});
+        toastr.success('Wine saved');
         this.context.router.push('/wines');
     }
 
