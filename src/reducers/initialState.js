@@ -1,4 +1,5 @@
 export default {
     makers: [],
-    wines: []
+    wines: [],
+    ajaxCallsInProgress: 0
 };

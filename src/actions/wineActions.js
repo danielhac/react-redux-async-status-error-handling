@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import wineApi from '../api/mockWineApi';
+import {beginAjaxCall} from './ajaxStatusActions';
 
 export function loadWinesSuccess(wines) {
     return { type: types.LOAD_WINES_SUCCESS, wines };
@@ -16,6 +17,7 @@ export function updateWineSuccess(wine) {
 // Thunk
 export function loadWines() {
     return function(dispatch) {
+        dispatch(beginAjaxCall());
         return wineApi.getAllWines().then(wines => {
             dispatch(loadWinesSuccess(wines));
         }).catch(error => {
@@ -29,6 +31,7 @@ export function loadWines() {
 // get direct access to get pieces of state
 export function saveWine(wine) {
     return function (dispatch, getState) {
+        dispatch(beginAjaxCall());
         return wineApi.saveWine(wine).then(savedWine => {
             // Check id, Update or create wine
             wine.id ? dispatch(updateWineSuccess(savedWine)) :
